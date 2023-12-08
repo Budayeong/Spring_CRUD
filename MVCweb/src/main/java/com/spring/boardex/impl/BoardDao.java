@@ -17,7 +17,7 @@ public class BoardDao {
 	private PreparedStatement pstmt=null;
 	private ResultSet rs=null;
 	
-	//1.데이터 저장 
+	//1.게시판 데이터 저장 
 	public void insertBoard(BoardDo bdo) {
 		System.out.println("insertBoard() --> ");
 		
@@ -172,4 +172,34 @@ public class BoardDao {
 		}
 		
 	}
+
+	//6.회원가입 데이터 저장 
+	public void memberJoinBoard(BoardDo bdo) {
+		System.out.println("insertBoard() --> ");
+		
+		//1.DB에 연결 
+		conn=JdbcUtil.getConnection();
+		String sql="insert into member values (?,?,?)";
+		try {
+			
+			//2.sql문 완성 
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, bdo.getId());
+			pstmt.setString(2, bdo.getName());
+			pstmt.setString(3, bdo.getPassword());
+			
+			//3.sql처리 
+			pstmt.executeUpdate();
+			
+			//4.연결 해제 
+			JdbcUtil.close(rs, pstmt, conn);
+			System.out.println("memberJoinBoard() 처리 완료 ");
+					
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+
 }

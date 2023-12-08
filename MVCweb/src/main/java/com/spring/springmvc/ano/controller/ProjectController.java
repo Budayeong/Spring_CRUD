@@ -2,6 +2,9 @@ package com.spring.springmvc.ano.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -103,6 +106,28 @@ public class ProjectController{
 		return "redirect:getBoardList.do";
 	}
 
+	//memberJoin
+	@RequestMapping(value = "/memberJoin.do")
+	public String memberJoin() {
+		
+		return "memberJoinView";
+	}
 	
+	//login
+	@RequestMapping(value = "/login.do")
+	public String login() {
+		
+		return "loginView";
+	}
+	
+	//memberJoinProc
+	@RequestMapping(value = "/memberJoinBoardProc.do")
+	public String memberJoinBoardProc(BoardDo bdo, BoardDao bdao, Model model) {
+		System.out.println("memberJoinBoardProcController -->");
+	
+		bdao.memberJoinBoard(bdo);
+
+		return "redirect:getBoardList.do";
+	}
 
 }

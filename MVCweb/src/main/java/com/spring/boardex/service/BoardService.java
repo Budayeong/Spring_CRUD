@@ -5,13 +5,15 @@ import java.util.ArrayList;
 import com.spring.boardex.impl.BoardDo;
 
 public interface BoardService {
+	
+	//게시판
 	//1. 게시판 데이터 저장
 	void insertBoard(BoardDo bdo);
 	
 	//2. 전체 게시판 데이터 가져오기 
 	ArrayList<BoardDo> getBoardList();
 	
-	//3. 하나의 게시판 데이터 가져옥 ㅣ
+	//3. 하나의 게시판 데이터 가져오기
 	BoardDo getOneBoard(BoardDo bdo);
 	
 	//4. 하나의 게시판 데이터 수정하기 
@@ -19,6 +21,9 @@ public interface BoardService {
 	
 	//5. 하나의 게시판 삭제하기 
 	void deleteBoard(BoardDo bdo);
+	
+	//로그인, 회원가입
+	
 	
 	
 }

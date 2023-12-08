@@ -10,6 +10,6 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
-<p><img src="/springmvc/resources/gyodong.jpg"></p>
+<p><img src="/springmvc2/resources/gyodong.jpg"></p>
 </body>
 </html>

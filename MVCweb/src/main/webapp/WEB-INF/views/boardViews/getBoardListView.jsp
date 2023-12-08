@@ -11,7 +11,9 @@
 <body>
 	<h2> 전체 게시판 데이터 보기 (getBoardListView.jsp) </h2>
 	<hr>
-	<a href = "insertBoard.do"> 새로운 데이터 추가 </a>
+	<a href = "insertBoard.do"> 새로운 데이터 추가 </a> <br>
+	<a href = "memberJoin.do"> 회원 가입 </a> <br>
+	<a href = "login.do"> 로그인 </a>
 	<table border="1px solid gray" style="border-collaps:collapse;">
 		<tr align="center" height="50">
 			<td width="200">번호</td>
