@@ -106,7 +106,6 @@ public class BoardDao {
 				board.setTitle(rs.getString(2));
 				board.setWriter(rs.getString(3));
 				board.setContent(rs.getString(4));
-				
 			}
 			JdbcUtil.close(rs, pstmt, conn);
 			System.out.println("getOneBoard 처리 완료!!");
@@ -133,6 +132,7 @@ public class BoardDao {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, bdo.getTitle());
 			pstmt.setString(2, bdo.getContent());
+			System.out.println(bdo.getContent());
 			pstmt.setInt(3, bdo.getSeq());
 			
 			//3.sql문 실행 
@@ -201,5 +201,31 @@ public class BoardDao {
 		}
 	}
 
+	//7.로그인 데이터 비교
+	public boolean userCheck(String id, String password) {
+	   Connection conn = null;
+       PreparedStatement pstmt = null;
+       ResultSet rs = null;
 
+       try {
+           //DB 연결 설정
+            conn = JdbcUtil.getConnection();
+
+			String sql="SELECT * FROM member WHERE id = ? AND password = ?";
+			pstmt = conn.prepareStatement(sql);
+	        pstmt.setString(1, id);
+	        pstmt.setString(2, password);
+	        
+	        rs = pstmt.executeQuery();
+	
+	        return rs.next(); // 결과가 있으면 true, 없으면 false 반환
+	        
+		   } catch (SQLException e) {
+	           e.printStackTrace();
+	           return false;
+		   } finally {
+	           // 리소스 해제
+	           JdbcUtil.close(rs, pstmt, conn);
+	}
+}
 }

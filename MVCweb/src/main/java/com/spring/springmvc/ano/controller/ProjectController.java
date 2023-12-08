@@ -130,4 +130,20 @@ public class ProjectController{
 		return "redirect:getBoardList.do";
 	}
 
+	//loginProc
+	@RequestMapping(value = "/loginProcBoard.do")
+	public String loginProc(BoardDo bdo, BoardDao bdao, Model model) {
+		System.out.println("loginProcBoardController -->");
+		
+        boolean userCheck = bdao.userCheck(bdo.getId(), bdo.getPassword());
+
+        // 3. 결과에 따라 페이지 이동
+        if (userCheck) {
+            // 사용자가 유효하면 
+        	return "redirect:getBoardList.do";
+        } else {
+            // 사용자가 유효하지 않으면 
+        	return "redirect:memberJoin.do";
+        }
+    }
 }

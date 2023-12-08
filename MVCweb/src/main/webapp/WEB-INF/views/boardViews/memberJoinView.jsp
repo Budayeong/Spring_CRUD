@@ -33,7 +33,7 @@
 			<tr align="center" height="50">
 				<td colspan="2">
 					<input type="submit" value="회원가입">
-					<input type="reset" value="취소">
+					<input type="submit" formaction="http://localhost:9090/springmvc2/getBoardList.do" value="취소">
 				</td>
 			</tr>
 		</table>

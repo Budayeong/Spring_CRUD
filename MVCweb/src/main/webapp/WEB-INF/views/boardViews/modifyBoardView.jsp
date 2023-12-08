@@ -18,7 +18,7 @@
 			<tr align="center" height="50">
 				<td width="200">글제목</td>
 				<td width="200">
-					<input type="text" value=${board.title} name="title">
+					<input type="text" value="${board.title}" name="title">
 				</td>
 			</tr>
 			<tr align="center" height="50">
@@ -28,7 +28,7 @@
 			<tr align="center" height="50">
 				<td width="200">글내용</td>
 				<td width="200">
-					<input type="text" value=${board.content} name="content">
+					<input type="text" value="${board.content}" name="content">
 				</td>
 			</tr>
 			<tr align="center" height="50">
