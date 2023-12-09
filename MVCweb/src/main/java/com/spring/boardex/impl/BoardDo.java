@@ -9,9 +9,12 @@ public class BoardDo {
 	private String name;
 	private String password;
 	private String number;
+	private String keyword; // 검색 키워드
+	private String type; // 검색 종류
 	
 	
 	
+
 	//로그인,회원가입
 	public String getId() {
 		return id;
@@ -80,6 +83,22 @@ public class BoardDo {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	

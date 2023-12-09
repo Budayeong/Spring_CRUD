@@ -9,27 +9,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2> 전체 게시판 데이터 보기 (getBoardListView.jsp) </h2>
+	<h2> 검색된 게시판 데이터 보기 (searchBoardList.jsp) </h2>
 	<hr>
 	<a href = "insertBoard.do"> 새로운 데이터 추가 </a> <br>
 	<a href = "memberJoin.do"> 회원 가입 </a> <br>
 	<a href = "login.do"> 로그인 </a>
-	<!-- 검색 -->
-	<form action="searchBoardList.do" method="post" id="searchFoam" name="search-form">
-        <select name="type" class="type-box">
-			<option value="">검색 유형 선택</option>
-			<option value="title">제목</option>
-			<option value="writer">작성자</option>
-			<option value="content">글내용</option>
-		</select>
-		<td colspan="2">
-          <input class="inputId" type="text" name="keyword" placeholder="검색어 입력">
-        </td>
-		<td>
-          <input class="submitBtn" type="submit" value="검색하기">
-		</td>
-	</form>
-
+	
 	<table border="1px solid gray" style="border-collaps:collapse;">
 		<tr align="center" height="50">
 			<td width="200">번호</td>

@@ -146,4 +146,19 @@ public class ProjectController{
         	return "redirect:memberJoin.do";
         }
     }
+
+	//searchBoardList
+	@RequestMapping(value = "/searchBoardList.do")
+	public String seachBoardList(BoardDo bdo, BoardDao bdao, Model model) {
+		System.out.println("searchBoardList() (Ano)-->");
+		
+		ArrayList<BoardDo> bList = bdao.searchBoardList(bdo);
+		model.addAttribute("bList",bList);
+		
+		return "searchBoardList";
+		
+	}
+
+
+
 }

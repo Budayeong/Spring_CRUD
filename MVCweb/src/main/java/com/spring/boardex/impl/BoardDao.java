@@ -228,4 +228,52 @@ public class BoardDao {
 	           JdbcUtil.close(rs, pstmt, conn);
 	}
 }
+
+	//8.검색된 게시글 가져오기
+	public ArrayList<BoardDo> searchBoardList(BoardDo bdo) {
+		System.out.println("searchBoardList() --> ");
+		ArrayList<BoardDo> bList = new ArrayList<BoardDo>();
+
+		//1.디비 연결
+		conn=JdbcUtil.getConnection();
+		
+		//2.sql문 완성(??처리 주된 내용)
+		
+		//검색조건이 존재할때 
+		if (bdo.getType() != null && !bdo.getType().isEmpty() && bdo.getKeyword() != null && !bdo.getKeyword().isEmpty()) {
+			String sql = "SELECT * FROM board WHERE " + bdo.getType() + " LIKE '%" + bdo.getKeyword() + "%'";
+			
+			
+			try {
+				pstmt=conn.prepareStatement(sql);
+				System.out.println(sql);
+				
+				
+				//3.sql실행 및 결과 받기
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					BoardDo bdo2=new BoardDo();
+					bdo2.setSeq(rs.getInt(1));
+					bdo2.setTitle(rs.getString(2));
+					bdo2.setWriter(rs.getString(3));
+					bdo2.setContent(rs.getString(4));
+					//배열 리스트에 읽어온 데이터 저장하기 
+					bList.add(bdo2);
+				}
+				
+				JdbcUtil.close(rs, pstmt, conn);
+				System.out.println("searchBoardList() 처리 완료!");
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return bList;
+	}
+	
+
+
+
+
 }

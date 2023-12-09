@@ -24,7 +24,6 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 
-
 	@Override
 	public void updateBoard(BoardDo bdo) {
 		// TODO Auto-generated method stub
