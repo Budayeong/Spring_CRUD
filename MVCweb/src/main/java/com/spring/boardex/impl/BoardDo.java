@@ -5,6 +5,7 @@ public class BoardDo {
 	private String title;
 	private String writer;
 	private String content;
+	private String time;
 	private String id;
 	private String name;
 	private String password;
@@ -99,6 +100,14 @@ public class BoardDo {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+	
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
 	}
 
 	

@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2> 전체 게시판 데이터 보기 (getBoardListView.jsp) </h2>
+	<h2> 서울특별시 청년지원 사업</h2>
 	<hr>
 	<a href = "insertBoard.do"> 새로운 데이터 추가 </a> <br>
 	<a href = "memberJoin.do"> 회원 가입 </a> <br>
@@ -19,8 +19,9 @@
         <select name="type" class="type-box">
 			<option value="">검색 유형 선택</option>
 			<option value="title">제목</option>
-			<option value="writer">작성자</option>
-			<option value="content">글내용</option>
+			<option value="writer">주관기관</option>
+			<option value="content">내용</option>
+			<option value="time">신청 기간</option>
 		</select>
 		<td colspan="2">
           <input class="inputId" type="text" name="keyword" placeholder="검색어 입력">
@@ -33,19 +34,21 @@
 	<table border="1px solid gray" style="border-collaps:collapse;">
 		<tr align="center" height="50">
 			<td width="200">번호</td>
-			<td width="200">글제목</td>
-			<td width="200">글작성자</td>
-			<td width="200">글내용</td>
+			<td width="200">제목</td>
+			<td width="200">주관기관</td>
+			<td width="400">내용</td>
+			<td width="200">신청 기간</td>
 		</tr>
 		<!-- jstl을 이용하여 데이터 출력 -->
 		<c:forEach items="${bList}" var="board">
 			<tr align="center" height="50">
 			<td width="200">${board.seq}</td>
-			<td width="200">
+			<td width="300">
 				<a href="getBoard.do?seq=${board.seq}">${board.title}</a>
 			</td>
 			<td width="200">${board.writer}</td>
-			<td width="200">${board.content}</td>
+			<td width="400">${board.content}</td>
+			<td width="200">${board.time}</td>
 		</tr>
 		</c:forEach>
 	</table>

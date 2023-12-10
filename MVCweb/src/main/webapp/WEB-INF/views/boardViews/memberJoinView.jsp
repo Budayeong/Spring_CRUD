@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2> 회원가입 (memberJoin.jsp)</h2>
+	<h2> 회원가입 </h2>
 	<hr>
 
 	<form action="memberJoinBoardProc.do" method="post">

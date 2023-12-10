@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2> 게시판 내용 수정 </h2>
+	<h2> 게시글 수정  </h2>
 	<hr>
 	<form action="modifyProcBoard.do?seq=${board.seq}" method="post">
 		<table border="1px solid gray" style="border-collaps:collapse;">
@@ -16,19 +16,25 @@
 				<td width="200">${board.seq}</td>
 			</tr>
 			<tr align="center" height="50">
-				<td width="200">글제목</td>
+				<td width="200">제목</td>
 				<td width="200">
 					<input type="text" value="${board.title}" name="title">
 				</td>
 			</tr>
 			<tr align="center" height="50">
-				<td width="200">글작성자</td>
+				<td width="200">주관 기관</td>
 				<td width="200">${board.writer}</td>
 			</tr>
 			<tr align="center" height="50">
-				<td width="200">글내용</td>
+				<td width="200">내용</td>
 				<td width="200">
 					<input type="text" value="${board.content}" name="content">
+				</td>
+			</tr>
+			<tr align="center" height="50">
+				<td width="200">신청 기간</td>
+				<td width="200">
+					<input type="text" value="${board.time}" name="time">
 				</td>
 			</tr>
 			<tr align="center" height="50">

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2> 로그인 (login.jsp)</h2>
+	<h2> 로그인 </h2>
 	<hr>
 	
 	<form action="loginProcBoard.do" method="post">

@@ -33,6 +33,7 @@ public class ProjectController{
 		System.out.println("writer:" + bdo.getWriter());
 		System.out.println("content:" + bdo.getContent());
 
+
 		BoardDao bdao = new BoardDao();
 		bdao.insertBoard(bdo);
 		

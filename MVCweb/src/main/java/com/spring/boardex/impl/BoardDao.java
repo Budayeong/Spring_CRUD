@@ -17,13 +17,14 @@ public class BoardDao {
 	private PreparedStatement pstmt=null;
 	private ResultSet rs=null;
 	
+	//게시판 관련 메서드
 	//1.게시판 데이터 저장 
 	public void insertBoard(BoardDo bdo) {
 		System.out.println("insertBoard() --> ");
 		
 		//1.DB에 연결 
 		conn=JdbcUtil.getConnection();
-		String sql="insert into board values (null,?,?,?)";
+		String sql="insert into board values (null,?,?,?,?)";
 		try {
 			
 			//2.sql문 완성 
@@ -31,6 +32,7 @@ public class BoardDao {
 			pstmt.setString(1, bdo.getTitle());
 			pstmt.setString(2, bdo.getWriter());
 			pstmt.setString(3, bdo.getContent());
+			pstmt.setString(4, bdo.getTime());
 			
 			//3.sql처리 
 			pstmt.executeUpdate();
@@ -67,6 +69,7 @@ public class BoardDao {
 				bdo.setTitle(rs.getString(2));
 				bdo.setWriter(rs.getString(3));
 				bdo.setContent(rs.getString(4));
+				bdo.setTime(rs.getString(5));
 				//배열 리스트에 읽어온 데이터 저장하기 
 				bList.add(bdo);
 			}
@@ -106,6 +109,7 @@ public class BoardDao {
 				board.setTitle(rs.getString(2));
 				board.setWriter(rs.getString(3));
 				board.setContent(rs.getString(4));
+				board.setTime(rs.getString(5));
 			}
 			JdbcUtil.close(rs, pstmt, conn);
 			System.out.println("getOneBoard 처리 완료!!");
@@ -125,15 +129,15 @@ public class BoardDao {
 		
 		//1.DB 연결 
 		conn=JdbcUtil.getConnection();
-		String sql="update board set title=?, content=? where seq=?";
+		String sql="update board set title=?, content=?, time=? where seq=?";
 		
 		//2.sql문 완성 
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, bdo.getTitle());
 			pstmt.setString(2, bdo.getContent());
-			System.out.println(bdo.getContent());
-			pstmt.setInt(3, bdo.getSeq());
+			pstmt.setString(3, bdo.getTime());
+			pstmt.setInt(4, bdo.getSeq());
 			
 			//3.sql문 실행 
 			pstmt.executeUpdate();
@@ -173,63 +177,7 @@ public class BoardDao {
 		
 	}
 
-	//6.회원가입 데이터 저장 
-	public void memberJoinBoard(BoardDo bdo) {
-		System.out.println("insertBoard() --> ");
-		
-		//1.DB에 연결 
-		conn=JdbcUtil.getConnection();
-		String sql="insert into member values (?,?,?)";
-		try {
-			
-			//2.sql문 완성 
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, bdo.getId());
-			pstmt.setString(2, bdo.getName());
-			pstmt.setString(3, bdo.getPassword());
-			
-			//3.sql처리 
-			pstmt.executeUpdate();
-			
-			//4.연결 해제 
-			JdbcUtil.close(rs, pstmt, conn);
-			System.out.println("memberJoinBoard() 처리 완료 ");
-					
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	//7.로그인 데이터 비교
-	public boolean userCheck(String id, String password) {
-	   Connection conn = null;
-       PreparedStatement pstmt = null;
-       ResultSet rs = null;
-
-       try {
-           //DB 연결 설정
-            conn = JdbcUtil.getConnection();
-
-			String sql="SELECT * FROM member WHERE id = ? AND password = ?";
-			pstmt = conn.prepareStatement(sql);
-	        pstmt.setString(1, id);
-	        pstmt.setString(2, password);
-	        
-	        rs = pstmt.executeQuery();
-	
-	        return rs.next(); // 결과가 있으면 true, 없으면 false 반환
-	        
-		   } catch (SQLException e) {
-	           e.printStackTrace();
-	           return false;
-		   } finally {
-	           // 리소스 해제
-	           JdbcUtil.close(rs, pstmt, conn);
-	}
-}
-
-	//8.검색된 게시글 가져오기
+	//6.검색된 게시글 가져오기
 	public ArrayList<BoardDo> searchBoardList(BoardDo bdo) {
 		System.out.println("searchBoardList() --> ");
 		ArrayList<BoardDo> bList = new ArrayList<BoardDo>();
@@ -257,6 +205,7 @@ public class BoardDao {
 					bdo2.setTitle(rs.getString(2));
 					bdo2.setWriter(rs.getString(3));
 					bdo2.setContent(rs.getString(4));
+					bdo2.setTime(rs.getString(5));
 					//배열 리스트에 읽어온 데이터 저장하기 
 					bList.add(bdo2);
 				}
@@ -271,6 +220,64 @@ public class BoardDao {
 		}
 		return bList;
 	}
+	
+	//회원 관련 메서드
+	//1.회원가입 데이터 저장 
+	public void memberJoinBoard(BoardDo bdo) {
+		System.out.println("insertBoard() --> ");
+		
+		//1.DB에 연결 
+		conn=JdbcUtil.getConnection();
+		String sql="insert into member values (?,?,?)";
+		try {
+			
+			//2.sql문 완성 
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, bdo.getId());
+			pstmt.setString(2, bdo.getName());
+			pstmt.setString(3, bdo.getPassword());
+			
+			//3.sql처리 
+			pstmt.executeUpdate();
+			
+			//4.연결 해제 
+			JdbcUtil.close(rs, pstmt, conn);
+			System.out.println("memberJoinBoard() 처리 완료 ");
+					
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	//2.로그인 데이터 비교
+	public boolean userCheck(String id, String password) {
+	   Connection conn = null;
+       PreparedStatement pstmt = null;
+       ResultSet rs = null;
+
+       try {
+           //DB 연결 설정
+            conn = JdbcUtil.getConnection();
+
+			String sql="SELECT * FROM member WHERE id = ? AND password = ?";
+			pstmt = conn.prepareStatement(sql);
+	        pstmt.setString(1, id);
+	        pstmt.setString(2, password);
+	        
+	        rs = pstmt.executeQuery();
+	
+	        return rs.next(); // 결과가 있으면 true, 없으면 false 반환
+	        
+		   } catch (SQLException e) {
+	           e.printStackTrace();
+	           return false;
+		   } finally {
+	           // 리소스 해제
+	           JdbcUtil.close(rs, pstmt, conn);
+	}
+}
+
 	
 
 
