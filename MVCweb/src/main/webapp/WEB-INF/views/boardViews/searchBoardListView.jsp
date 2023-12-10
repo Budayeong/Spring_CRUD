@@ -18,7 +18,7 @@
             padding: 10px; /* 내부 여백 설정 */
         }
 </style>
-<title>청년지원 사업</title>
+<title>Insert title here</title>
 </head>
 <body>
 
@@ -112,6 +112,10 @@
 		</c:forEach>
 	</table>
 </div>
+
+
+
+
 
 	
 </body>

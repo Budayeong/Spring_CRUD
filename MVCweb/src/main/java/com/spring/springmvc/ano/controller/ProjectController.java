@@ -150,13 +150,25 @@ public class ProjectController{
 
 	//searchBoardList
 	@RequestMapping(value = "/searchBoardList.do")
-	public String seachBoardList(BoardDo bdo, BoardDao bdao, Model model) {
+	public String searchBoardList(BoardDo bdo, BoardDao bdao, Model model) {
 		System.out.println("searchBoardList() (Ano)-->");
 		
 		ArrayList<BoardDo> bList = bdao.searchBoardList(bdo);
 		model.addAttribute("bList",bList);
 		
-		return "searchBoardList";
+		return "searchBoardListView";
+		
+	}
+
+	//sortBoardList
+	@RequestMapping(value = "/sortBoardList.do")
+	public String sortBoardList(BoardDo bdo, BoardDao bdao, Model model) {
+		System.out.println("sortBoardList() (Ano)-->");
+		
+		ArrayList<BoardDo> bList = bdao.sortBoardList(bdo);
+		model.addAttribute("bList",bList);
+		
+		return "sortBoardListView";
 		
 	}
 

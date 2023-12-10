@@ -24,7 +24,7 @@ public class BoardDao {
 		
 		//1.DB에 연결 
 		conn=JdbcUtil.getConnection();
-		String sql="insert into board values (null,?,?,?,?)";
+		String sql="insert into board values (null,?,?,?,?,?,?,?)";
 		try {
 			
 			//2.sql문 완성 
@@ -33,6 +33,10 @@ public class BoardDao {
 			pstmt.setString(2, bdo.getWriter());
 			pstmt.setString(3, bdo.getContent());
 			pstmt.setString(4, bdo.getTime());
+			pstmt.setString(5, bdo.getEndtime());
+			pstmt.setString(6, bdo.getWebname());
+			pstmt.setString(7, bdo.getWebsite());
+			
 			
 			//3.sql처리 
 			pstmt.executeUpdate();
@@ -70,6 +74,9 @@ public class BoardDao {
 				bdo.setWriter(rs.getString(3));
 				bdo.setContent(rs.getString(4));
 				bdo.setTime(rs.getString(5));
+				bdo.setEndtime(rs.getString(6));
+				bdo.setWebname(rs.getString(7));
+				bdo.setWebsite(rs.getString(8));
 				//배열 리스트에 읽어온 데이터 저장하기 
 				bList.add(bdo);
 			}
@@ -110,6 +117,9 @@ public class BoardDao {
 				board.setWriter(rs.getString(3));
 				board.setContent(rs.getString(4));
 				board.setTime(rs.getString(5));
+				board.setEndtime(rs.getString(6));
+				board.setWebname(rs.getString(7));
+				board.setWebsite(rs.getString(8));
 			}
 			JdbcUtil.close(rs, pstmt, conn);
 			System.out.println("getOneBoard 처리 완료!!");
@@ -129,7 +139,7 @@ public class BoardDao {
 		
 		//1.DB 연결 
 		conn=JdbcUtil.getConnection();
-		String sql="update board set title=?, content=?, time=? where seq=?";
+		String sql="update board set title=?, content=?, time=?, endtime=?, webname=?, website=? where seq=?";
 		
 		//2.sql문 완성 
 		try {
@@ -137,7 +147,10 @@ public class BoardDao {
 			pstmt.setString(1, bdo.getTitle());
 			pstmt.setString(2, bdo.getContent());
 			pstmt.setString(3, bdo.getTime());
-			pstmt.setInt(4, bdo.getSeq());
+			pstmt.setString(4, bdo.getEndtime());
+			pstmt.setString(5, bdo.getWebname());
+			pstmt.setString(6, bdo.getWebsite());
+			pstmt.setInt(7, bdo.getSeq());
 			
 			//3.sql문 실행 
 			pstmt.executeUpdate();
@@ -206,6 +219,10 @@ public class BoardDao {
 					bdo2.setWriter(rs.getString(3));
 					bdo2.setContent(rs.getString(4));
 					bdo2.setTime(rs.getString(5));
+					bdo2.setEndtime(rs.getString(6));
+					bdo2.setWebname(rs.getString(7));
+					bdo2.setWebsite(rs.getString(8));
+					
 					//배열 리스트에 읽어온 데이터 저장하기 
 					bList.add(bdo2);
 				}
@@ -219,7 +236,60 @@ public class BoardDao {
 			}
 		}
 		return bList;
+	
 	}
+
+	//7.정렬된 데이터 가져오기 
+	public ArrayList<BoardDo> sortBoardList(BoardDo bdo){
+		System.out.println("sortBoardList() ==> ");
+		ArrayList<BoardDo> bList = new ArrayList<BoardDo>();
+		
+		//1. 디비 연결
+		conn=JdbcUtil.getConnection();
+		String sql="SELECT * FROM board";
+		System.out.println(bdo.getSort());
+		
+		try {
+			 // 2. sql문 완성
+	        if ("신청마감".equals(bdo.getSort())) {
+	            sql += " WHERE endtime >= CURDATE() ORDER BY endtime ASC";
+	            System.out.println(sql);
+	        } else if ("사이트".equals(bdo.getSort())) {
+	            sql += " ORDER BY webname ASC";
+	            System.out.println(sql);
+	        }
+
+	        pstmt = conn.prepareStatement(sql);
+			
+			//3.sql실행 및 결과 받기
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				BoardDo bdo2=new BoardDo();
+				bdo2.setSeq(rs.getInt(1));
+				bdo2.setTitle(rs.getString(2));
+				bdo2.setWriter(rs.getString(3));
+				bdo2.setContent(rs.getString(4));
+				bdo2.setTime(rs.getString(5));
+				bdo2.setEndtime(rs.getString(6));
+				bdo2.setWebname(rs.getString(7));
+				bdo2.setWebsite(rs.getString(8));
+				//배열 리스트에 읽어온 데이터 저장하기 
+				bList.add(bdo2);
+			}
+			
+			JdbcUtil.close(rs, pstmt, conn);
+			System.out.println("getBoardList() 처리 완료!");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return bList;
+	}
+
+	
 	
 	//회원 관련 메서드
 	//1.회원가입 데이터 저장 

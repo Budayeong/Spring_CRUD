@@ -18,7 +18,7 @@
             padding: 10px; /* 내부 여백 설정 */
         }
 </style>
-<title>청년지원 사업</title>
+<title>Insert title here</title>
 </head>
 <body>
 
@@ -86,7 +86,7 @@
 	  </div>
 	</div>
 	<!-- 게시판  내용-->
-	<table class="mx-auto mt-4" border="1px solid gray" style="border-collaps:collapse;">
+	<table border="1px solid gray" style="border-collaps:collapse;">
 		<tr align="center" height="50">
 			<td width="200">번호</td>
 			<td width="200">제목</td>
@@ -112,7 +112,6 @@
 		</c:forEach>
 	</table>
 </div>
-
 	
 </body>
 </html>

@@ -6,6 +6,10 @@ public class BoardDo {
 	private String writer;
 	private String content;
 	private String time;
+	private String endtime;
+	private String webname;
+	private String website;
+	private String sort;
 	private String id;
 	private String name;
 	private String password;
@@ -109,6 +113,38 @@ public class BoardDo {
 	public void setTime(String time) {
 		this.time = time;
 	}
+	public String getWebname() {
+		return webname;
+	}
+
+	public void setWebname(String webname) {
+		this.webname = webname;
+	}
+
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+	
+	public String getEndtime() {
+		return endtime;
+	}
+
+	public void setEndtime(String endtime) {
+		this.endtime = endtime;
+	}
+
+	public String getSort() {
+		return sort;
+	}
+
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
+
 
 	
 }
