@@ -22,10 +22,11 @@
 </head>
 <body>
 
+
 <!-- 네비게이션 바  -->	
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">청년지원 사업</a>
+    <a class="navbar-brand" href="getBoardList.do">청년지원 사업</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -55,36 +56,43 @@
 
 <!-- 게시판 -->
 <div class="container mt-4">
-	  <!-- 정렬 -->
-	<div class="row">
-	  <div class="col-md-6">
-	    <div class="dropdown">
-	      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-	        정렬 기준
-	      </button>
-	      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-	        <li><a class="dropdown-item" href="sortBoardList.do?sort=신청마감">신청 마감</a></li>
-	        <li><a class="dropdown-item" href="sortBoardList.do?sort=사이트">신청 사이트</a></li>
-	      </ul>
-	    </div>
-	  </div>
-	  <!-- 검색 -->
-	  <div class="col-md-6 text-end">
-	    <form action="searchBoardList.do" method="post" id="searchFoam" name="search-form">
-	      <select name="type" class="type-box">
-	        <option value="">검색 유형 선택</option>
-	        <option value="title">제목</option>
-	        <option value="writer">주관기관</option>
-	        <option value="content">내용</option>
-	        <option value="time">신청 기간</option>
-	        <option value="endtime">신청 마감</option>
-	        <option value="webname">신청 사이트</option>
-	      </select>
-	      <input class="inputId" type="text" name="keyword" placeholder="검색어 입력">
-	      <input class="submitBtn" type="submit" value="검색하기">
-	    </form>
-	  </div>
-	</div>
+<div class="row align-items-center">
+    <!-- 정렬 버튼 -->
+    <div class="col-md-2">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                정렬 기준
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="sortBoardList.do?sort=신청마감">신청 마감</a></li>
+                <li><a class="dropdown-item" href="sortBoardList.do?sort=사이트">신청 사이트</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 게시글 추가 버튼 -->
+    <div class="col-md-2">
+        <a class="btn btn-primary" href="insertBoard.do" style="margin-left: 1px;">게시글 추가</a>
+    </div>
+
+    <!-- 검색 폼 -->
+    <div class="col-md-7 text-end">
+        <form action="searchBoardList.do" method="post" id="searchFoam" name="search-form">
+            <select name="type" class="type-box">
+                <option value="">검색 유형 선택</option>
+                <option value="title">제목</option>
+                <option value="writer">주관기관</option>
+                <option value="content">내용</option>
+                <option value="time">신청 기간</option>
+                <option value="endtime">신청 마감</option>
+                <option value="webname">신청 사이트</option>
+            </select>
+            <input class="inputId" type="text" name="keyword" placeholder="검색어 입력">
+            <input class="submitBtn" type="submit" value="검색하기">
+        </form>
+    </div>
+</div>
+
 	<!-- 게시판  내용-->
 	<table class="mx-auto mt-4" border="1px solid gray" style="border-collaps:collapse;">
 		<tr align="center" height="50">
